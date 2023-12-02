@@ -4,12 +4,14 @@ package domain;
 import java.util.List;
 
 public class Store {
-	List<Table> tables;
-	List<Menu> menus;
+	private List<Table> tables;
+	private List<Menu> menus;
+	private DiscountEvent discountEvent;
 
 	public Store(List<Table> tables, List<Menu> menus){
 		this.tables = tables;
 		this.menus = menus;
+		this.discountEvent = new DiscountEvent();
 	}
 
 	public List<Table> getTables(){
@@ -19,6 +21,8 @@ public class Store {
 	public List<Menu> getMenus(){
 		return this.menus;
 	}
+
+	public DiscountEvent getDiscountEvent(){ return this.discountEvent;}
 
 	public Table findTableByNumber(int tableNumber){
 		for(Table table : tables){
