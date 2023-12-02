@@ -16,11 +16,10 @@ public class PayManager {
 		OutputView.printOrder(order);
 		int payWayNumber = InputView.inputPayWay(tableNumber);
 
-		// TODO: 수정하기
 		int totalPrice = calculateTotalPrice(order);
 		int priceDiscountedByOrderEvent = store.getDiscountEvent().discountByChicken_10(order, totalPrice);
 		double priceDiscountByPayEvent = store.getDiscountEvent().discountByPay_Money(payWayNumber, priceDiscountedByOrderEvent);
-
+		OutputView.printPriceToPay((int) Math.round(priceDiscountByPayEvent));
 	};
 
 	private int calculateTotalPrice(Map<Menu, Integer> order){

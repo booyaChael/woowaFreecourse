@@ -45,6 +45,11 @@ public class OutputView {
         }
     }
 
+    public static void printPriceToPay(int price){
+        System.out.println("## 최종 결제할 금액");
+        System.out.printf("%d원\n", price);
+    }
+
     private static void printLine(final String line, final int count) {
         for (int index = 0; index < count; index++) {
             System.out.print(line);
