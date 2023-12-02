@@ -4,6 +4,7 @@ import domain.Menu;
 import domain.Table;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     private static final String TOP_LINE = "┌ ─ ┐";
@@ -28,6 +29,19 @@ public class OutputView {
     public static void printMenus(final List<Menu> menus) {
         for (final Menu menu : menus) {
             System.out.println(menu);
+        }
+    }
+
+    public static void printOrder(Map<Menu, Integer> order){
+        System.out.println("## 주문 내역");
+        System.out.printf("%-10s %-5s %-5s%n", "메뉴", "수량", "금액");
+
+        for (Map.Entry<Menu, Integer> entry : order.entrySet()) {
+            Menu menu = entry.getKey();
+            int count = entry.getValue();
+            int totalPrice = menu.getPrice() * count;
+
+            System.out.printf("%-10s %-5d %-5d%n", menu.getName(), count, totalPrice);
         }
     }
 

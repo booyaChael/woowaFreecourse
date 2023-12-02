@@ -15,14 +15,16 @@ public class Program {
 	}
 
 	public void run() {
-		OutputView.printMain();
-		int functionNumber = InputView.inputFunctionNumber();
+		while(true){
+			OutputView.printMain();
+			int functionNumber = InputView.inputFunctionNumber();
 
-		if(functionNumber == 1){
-			orderManager.run(store);
-		}
-		if(functionNumber == 2){
-			payManager.run();
+			if(functionNumber == 1){
+				orderManager.run(store);
+			}
+			if(functionNumber == 2){
+				payManager.run(store);
+			}
 		}
 	};
 

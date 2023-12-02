@@ -28,4 +28,8 @@ public class Table {
         System.out.println(menu.getName());
         System.out.println(count);
     }
+
+    public Map<Menu, Integer> getOrder(){
+        return this.order;
+    }
 }
