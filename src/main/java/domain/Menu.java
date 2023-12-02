@@ -1,3 +1,4 @@
+//Menu.java
 package domain;
 
 public class Menu {
@@ -16,5 +17,13 @@ public class Menu {
     @Override
     public String toString() {
         return category + " " + number + " - " + name + " : " + price + "원";
+    }
+
+    public int getNumber(){
+        return this.number;
+    }
+
+    public String getName(){
+        return this.name;
     }
 }

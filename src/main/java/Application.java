@@ -19,5 +19,6 @@ public class Application {
         Store store = new Store(TableRepository.tables(), MenuRepository.menus());
 
         Program program = new Program(store, orderManager, payManager);
+        program.run();
     }
 }
