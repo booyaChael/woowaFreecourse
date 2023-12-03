@@ -1,3 +1,4 @@
+//LineRepository.java
 package subway.domain;
 
 import java.util.ArrayList;
@@ -18,6 +19,15 @@ public class LineRepository {
 
     public static boolean deleteLineByName(String name) {
         return lines.removeIf(line -> Objects.equals(line.getName(), name));
+    }
+
+    public static Line getLineByName(String name){
+        for(Line line : lines){
+            if(name.equals(line.getName())){
+                return line;
+            }
+            throw new IllegalArgumentException("[ERROR] 해당되는 노선이 존재하지 않습니다.");
+        }
     }
 
     static {
