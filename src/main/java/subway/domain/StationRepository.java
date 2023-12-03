@@ -27,7 +27,7 @@ public class StationRepository {
                 return station;
             }
         }
-        throw new IllegalArgumentException("[ERROR] 해당되는 역 이름이 존재하지 않습니다.");
+        return null;
     }
 
     static {
