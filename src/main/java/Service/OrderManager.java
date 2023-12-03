@@ -1,9 +1,12 @@
 //OrderManager.java
-package domain;
+package Service;
 
 import java.util.List;
 import java.util.Map;
 
+import domain.Menu;
+import domain.Store;
+import domain.Table;
 import view.InputView;
 import view.OutputView;
 
