@@ -26,8 +26,8 @@ public class LineRepository {
             if(name.equals(line.getName())){
                 return line;
             }
-            throw new IllegalArgumentException("[ERROR] 해당되는 노선이 존재하지 않습니다.");
         }
+        throw new IllegalArgumentException("[ERROR] 해당되는 노선이 존재하지 않습니다.");
     }
 
     static {
