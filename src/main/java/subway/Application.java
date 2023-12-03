@@ -13,7 +13,7 @@ public class Application {
         StationManager stationManager = new StationManager();
         SectionManager sectionManager = new SectionManager();
 
-        Program program = new Program(lineManager, stationManager, sectionManager);
+        Program program = new Program(stationManager,lineManager, sectionManager);
         program.run();
     }
 }
