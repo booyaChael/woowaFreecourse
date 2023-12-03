@@ -19,4 +19,10 @@ public class LineRepository {
     public static boolean deleteLineByName(String name) {
         return lines.removeIf(line -> Objects.equals(line.getName(), name));
     }
+
+    static {
+        addLine(new Line("2호선"));
+        addLine(new Line("3호선"));
+        addLine(new Line("신분당선"));
+    }
 }
