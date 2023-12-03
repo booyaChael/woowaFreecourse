@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Map;
 
+import util.Constants;
+
 public class DiscountEvent {
 	public int discountByChicken_10(Map<Menu, Integer> order, int totalPrice){
 		int totalChickenCount = 0;
@@ -16,9 +18,7 @@ public class DiscountEvent {
 
 	public double discountByPay_Money(int payway, int totalPrice){
 		System.out.println(totalPrice);
-		if(payway == 2){
-			System.out.println("IT's 현금");
-			System.out.println(totalPrice * 0.95);
+		if(payway == Constants.PAY_MONEY){
 			return totalPrice * 0.95;
 		}
 		return totalPrice;

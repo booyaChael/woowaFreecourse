@@ -2,6 +2,7 @@ package domain;
 
 import view.InputView;
 import view.OutputView;
+import util.Constants;
 
 public class Program {
 	private Store store;
@@ -17,16 +18,37 @@ public class Program {
 	public void run() {
 		while(true){
 			OutputView.printMain();
-			int functionNumber = InputView.inputFunctionNumber();
+			int function = readFunction();
 
-			if(functionNumber == 1){
+			if(function == Constants.FUNCTION_ORDER){
 				orderManager.run(store);
 			}
-			if(functionNumber == 2){
+			if(function == Constants.FUNCTION_PAY){
 				payManager.run(store);
+			}
+			if(function == Constants.FUNCTION_QUIT){
+				return;
 			}
 		}
 	};
+
+	private int readFunction(){
+		while(true){
+			try{
+				int functionNumber = InputView.inputFunctionNumber();
+				validateFunctionNumber(functionNumber);
+				return functionNumber;
+			} catch(IllegalArgumentException e){
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	private void validateFunctionNumber(int functionNumber){
+		if(functionNumber < Constants.FUNCTION_ORDER || functionNumber > Constants.FUNCTION_QUIT){
+			throw new IllegalArgumentException("[ERROR] 올바른 입력값이 아닙니다."+Constants.FUNCTION_ORDER+"과 "+Constants.FUNCTION_QUIT+" 사이의 숫자로 입력해주세요.");
+		}
+	}
 
 }
 

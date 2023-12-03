@@ -30,7 +30,7 @@ public class Store {
 				return table;
 			}
 		}
-		return null;
+		throw new IllegalArgumentException("[ERROR] 해당되는 테이블 번호가 없습니다. 다시 입력해주세요.");
 	}
 
 	public Menu findMenuByNumber(int menuNumber){
@@ -39,7 +39,7 @@ public class Store {
 				return menu;
 			}
 		}
-		return null;
+		throw new IllegalArgumentException("[ERROR] 해당되는 메뉴번호가 없습니다. 다시 입력해주세요.");
 	}
 
 }

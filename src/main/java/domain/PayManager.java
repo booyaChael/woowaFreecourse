@@ -2,25 +2,53 @@ package domain;
 
 import java.util.Map;
 
+import util.Constants;
 import view.InputView;
 import view.OutputView;
 
 public class PayManager {
 	public void run(Store store){
-		OutputView.printTables(store.getTables());
-		int tableNumber = InputView.inputTableNumber();
-		Table table = store.findTableByNumber(tableNumber);
+		Table table = readTableNumber(store);
 
-		Map<Menu, Integer> order = table.getOrder();
+		OutputView.printOrder(table.getOrder());
 
-		OutputView.printOrder(order);
-		int payWayNumber = InputView.inputPayWay(tableNumber);
+		int payWayNumber = readPayWay(table.getNumber());
 
-		int totalPrice = calculateTotalPrice(order);
-		int priceDiscountedByOrderEvent = store.getDiscountEvent().discountByChicken_10(order, totalPrice);
-		double priceDiscountByPayEvent = store.getDiscountEvent().discountByPay_Money(payWayNumber, priceDiscountedByOrderEvent);
-		OutputView.printPriceToPay((int) Math.round(priceDiscountByPayEvent));
+		int discountedPrice = calculateDiscountedPrice(table.getOrder(), store.getDiscountEvent(), payWayNumber);
+
+		OutputView.printPriceToPay(discountedPrice);
 	};
+
+	private Table readTableNumber(Store store){
+		while(true){
+			try{
+				OutputView.printTables(store.getTables());
+				int tableNumber = InputView.inputTableNumber();
+				return store.findTableByNumber(tableNumber);
+			} catch(IllegalArgumentException e){
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	private int readPayWay(int tableNumber){
+		while(true){
+			try{
+				int payWayNumber = InputView.inputPayWay(tableNumber);
+				validatePayWayNumber(payWayNumber);
+				return payWayNumber;
+			} catch(IllegalArgumentException e){
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	private int calculateDiscountedPrice(Map<Menu, Integer> order, DiscountEvent discountEvent, int payWayNumber){
+		int totalPrice = calculateTotalPrice(order);
+		int priceDiscountedByOrderEvent = discountEvent.discountByChicken_10(order, totalPrice);
+		double priceDiscountByPayEvent = discountEvent.discountByPay_Money(payWayNumber, priceDiscountedByOrderEvent);
+		return (int) Math.round(priceDiscountByPayEvent);
+	}
 
 	private int calculateTotalPrice(Map<Menu, Integer> order){
 		int totalPrice = 0;
@@ -31,5 +59,11 @@ public class PayManager {
 			totalPrice += menuPrice * count;
 		}
 		return totalPrice;
+	}
+
+	private void validatePayWayNumber(int payWayNumber){
+		if(payWayNumber != Constants.PAY_CREDIT_CARD && payWayNumber != Constants.PAY_MONEY){
+			throw new IllegalArgumentException("[ERROR] 1 또는 2로 다시 입력해주세요.");
+		}
 	}
 }
