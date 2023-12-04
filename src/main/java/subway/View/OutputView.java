@@ -1,5 +1,10 @@
 package subway.View;
 
+import java.util.List;
+
+import subway.domain.Line;
+import subway.domain.Station;
+
 public class OutputView {
 	static public void printMainFunction(){
 		System.out.println("## 메인 화면\n"
@@ -19,7 +24,14 @@ public class OutputView {
 	}
 
 	static public void printStationRegisteredSuccess(){
-		System.out.println("[INFO] 지하철 역이 등록되었습니다.");
+		System.out.println("\n[INFO] 지하철 역이 등록되었습니다.\n");
+	}
+
+	static public void printAllStations(List<Station> stations){
+		System.out.println("");
+		for(Station station : stations){
+			System.out.printf("[INFO] %s\n", station.getName());
+		}
 	}
 
 	static public void printLineFunction(){
@@ -28,6 +40,13 @@ public class OutputView {
 			+ "2. 노선 삭제\n"
 			+ "3. 노선 조회\n"
 			+ "B. 돌아가기\n");
+	}
+
+	static public void printAllLines(List<Line> lines){
+		System.out.println("");
+		for(Line line : lines){
+			System.out.printf("[INFO] %s\n", line.getName());
+		}
 	}
 
 	static public void printSectionFunction(){

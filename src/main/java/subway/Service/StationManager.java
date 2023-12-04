@@ -9,20 +9,27 @@ import subway.domain.StationRepository;
 public class StationManager {
 	public void run(){
 		OutputView.printStationFunction();
-		int function = InputView.getFunctionSelectInput();
-		if(function == 1){
+		String function = InputView.getFunctionSelectInput();
+		if(function.equals("1")){
 			registerStation();
 		}
-		if(function == 2){
-
+		if(function.equals("2")){
+			deleteStation();
 		}
+		if(function.equals("3")){
+			readStations();
+		}
+		if(function.equals("B")){
+			return;
+		}
+		throw new IllegalArgumentException("[ERROR] 올바른 입력값이 아닙니다.");
 	}
 
 	private void registerStation(){
 		while(true){
 			try{
 				String stationName = InputView.getStationToRegisterInput();
-				validateStationName(stationName);
+				validateRegister(stationName);
 				StationRepository.addStation(new Station(stationName));
 				OutputView.printStationRegisteredSuccess();
 				break;
@@ -32,12 +39,29 @@ public class StationManager {
 		}
 	}
 
-	private void validateStationName(String stationName){
-		if(StationRepository.getStationByName(stationName) != null){
-			throw new IllegalArgumentException("[ERROR] 이미 존재하는 역 이름입니다. 다시 입력해주세요.");
+	private void deleteStation(){
+		while(true){
+			try{
+				String stationName = InputView.getStationToDeleteInput();
+				validateDelete(stationName);
+				StationRepository.deleteStation(stationName);
+				break;
+			} catch(IllegalArgumentException e){
+				System.out.println(e.getMessage());
+			}
 		}
-		if(stationName.length() < 2){
-			throw new IllegalArgumentException("[ERROR] 역 이름은 2글자 이상이어야 합니다. 다시 입력해주세요.");
-		}
+	}
+
+	private void readStations(){
+		OutputView.printAllStations(StationRepository.stations());
+	}
+
+	private void validateRegister(String stationName){
+		Validator.newStationShouldHasUniqueName(stationName);
+		Validator.lengthShouldBeOver_2(stationName);
+	}
+
+	private void validateDelete(String stationName){
+		Validator.stationShouldExist(stationName);
 	}
 }

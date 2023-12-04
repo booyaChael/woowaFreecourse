@@ -27,12 +27,12 @@ public class LineRepository {
                 return line;
             }
         }
-        throw new IllegalArgumentException("[ERROR] 해당되는 노선이 존재하지 않습니다.");
+        return null;
     }
 
     static {
-        addLine(new Line("2호선"));
-        addLine(new Line("3호선"));
-        addLine(new Line("신분당선"));
+        addLine(new Line("2호선", StationRepository.getStationByName("교대역"), StationRepository.getStationByName("역삼역")));
+        addLine(new Line("3호선", StationRepository.getStationByName("교대역"), StationRepository.getStationByName("매봉역")));
+        addLine(new Line("신분당선", StationRepository.getStationByName("강남역"), StationRepository.getStationByName("양재시민의숲역")));
     }
 }
