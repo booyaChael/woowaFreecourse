@@ -4,6 +4,7 @@ package subway.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class SectionRepository {
 	private static final List<Section> sections = new ArrayList<>();
@@ -14,6 +15,10 @@ public class SectionRepository {
 
 	public static void addSection(Section section){
 		sections.add(section);
+	}
+
+	public static boolean deleteSection(String lineName){
+		return sections.removeIf(section -> Objects.equals(section.getLineName(), lineName));
 	}
 
 	public static void addStationToSection(String lineName, String stationName, int index){

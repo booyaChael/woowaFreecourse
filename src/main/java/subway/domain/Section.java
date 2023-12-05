@@ -18,6 +18,10 @@ public class Section {
 		return line;
 	}
 
+	public String getLineName(){
+		return line.getName();
+	}
+
 	public void addStationByIndex(int index, Station station){
 		if (index >= 0 && index <= stations.size()) {
 			stations.add(index, station);

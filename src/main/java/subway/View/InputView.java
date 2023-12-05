@@ -57,5 +57,10 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
+	static public String getLineToDeleteSection(){
+		System.out.println("## 삭제할 구간의 노선을 입력하세요.");
+		return scanner.next();
+	}
+
 
 }

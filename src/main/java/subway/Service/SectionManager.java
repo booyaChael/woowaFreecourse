@@ -2,11 +2,7 @@ package subway.Service;
 
 import subway.View.InputView;
 import subway.View.OutputView;
-import subway.domain.Line;
-import subway.domain.LineRepository;
 import subway.domain.SectionRepository;
-import subway.domain.Station;
-import subway.domain.StationRepository;
 
 public class SectionManager {
 	public void run(){
@@ -50,6 +46,8 @@ public class SectionManager {
 	}
 
 	private void deleteSection(){
+		String lineName = InputView.getLineToDeleteSection();
+		SectionRepository.deleteSection(lineName);
 	}
 
 	private void validateLineNameToRegister(String lineName){
