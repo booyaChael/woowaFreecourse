@@ -20,20 +20,23 @@ public class Program {
 		while(true){
 			try{
 				OutputView.printMainFunction();
-				String functionSelect = InputView.getFunctionSelectInput();
+				String functionSelect = InputView.getFunctionSelect();
 				if(functionSelect.equals("1")){
 					stationManager.run();
+					continue;
 				}
 				if(functionSelect.equals("2")){
 					lineManager.run();
+					continue;
 				}
 				if(functionSelect.equals("3")){
 					sectionManager.run();
+					continue;
 				}
 				if(functionSelect.equals("Q")){
 					return;
 				}
-				throw new IllegalArgumentException("[ERROR] 올바른 입력값이 아닙니다.");
+				throw new IllegalArgumentException("[ERROR] 올바른 입력값이 아닙니다. 1,2,3,Q 중 하나로 입력해주세요.");
 			} catch(IllegalArgumentException e){
 				System.out.println(e.getMessage());
 			}

@@ -1,6 +1,7 @@
 package subway.Service;
 
 import subway.domain.LineRepository;
+import subway.domain.SectionRepository;
 import subway.domain.StationRepository;
 
 public class Validator {
@@ -25,6 +26,18 @@ public class Validator {
 	static public void lineShouldHasUniqueName(String lineName){
 		if(LineRepository.getLineByName(lineName) != null){
 			throw new IllegalArgumentException("[ERROR] 이미 존재하는 노선 이름입니다. 다시 입력해주세요.");
+		}
+	}
+
+	static public void lineShouldExist(String lineName){
+		if(LineRepository.getLineByName(lineName) == null){
+			throw new IllegalArgumentException("[ERROR] 입력하신 노선이 존재하지 않습니다. 다시 입력해주세요.");
+		}
+	}
+
+	static public void orderShouldBeSmallerThanSectionSize(int order){
+		if(order > SectionRepository.sections().size()){
+			throw new IllegalArgumentException("[ERROR] 입력하신 순서에 노선을 저장할 수 없습니다. 다시 입력해주세요.");
 		}
 	}
 }

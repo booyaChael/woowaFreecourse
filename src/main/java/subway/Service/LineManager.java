@@ -12,15 +12,18 @@ public class LineManager {
 		while(true){
 			try{
 				OutputView.printLineFunction();
-				String function = InputView.getFunctionSelectInput();
+				String function = InputView.getFunctionSelect();
 				if(function.equals("1")){
 					registerLine();
+					return;
 				}
 				if(function.equals("2")){
 					deleteLine();
+					return;
 				}
 				if(function.equals("3")){
 					readLines();
+					return;
 				}
 				if(function.equals("B")){
 					return;
@@ -35,14 +38,14 @@ public class LineManager {
 	private void registerLine(){
 		while(true){
 			try{
-				String lineName = InputView.getLineToRegisterInput();
+				String lineName = InputView.getLineToRegister();
 				validateLineNameToRegister(lineName);
 
-				String startStationName = InputView.getStartStationOfLineInput();
+				String startStationName = InputView.getStartStationOfLine();
 				validateStartStation(startStationName);
 				Station startStation = StationRepository.getStationByName(startStationName);
 
-				String endStationName = InputView.getEndStationOfLineInput();
+				String endStationName = InputView.getEndStationOfLine();
 				validateEndStation(endStationName);
 				Station endStation = StationRepository.getStationByName(endStationName);
 
@@ -57,7 +60,7 @@ public class LineManager {
 	private void deleteLine(){
 		while(true){
 			try{
-				String lineName = InputView.getLineToDeleteInput();
+				String lineName = InputView.getLineToDelete();
 				validateDelete(lineName);
 				LineRepository.deleteLineByName(lineName);
 				break;
@@ -68,7 +71,11 @@ public class LineManager {
 	}
 
 	private void readLines(){
-		OutputView.printAllLines(LineRepository.lines());
+		try{
+			OutputView.printAllLines(LineRepository.lines());
+		} catch(IllegalArgumentException e){
+			System.out.println(e.getMessage());
+		}
 	}
 
 	private void validateLineNameToRegister(String lineName){

@@ -9,13 +9,13 @@ public class Section {
 	private Line line;
 	private List<Station> stations;
 
-	public Section(Line line, Station fromStation, Station toStation, Station... otherStations){
+	public Section(Line line){
 		this.line = line;
-		List<Station> stationList = new ArrayList<>();
-		stationList.add(fromStation);
-		stationList.addAll(Arrays.asList(otherStations));
-		stationList.add(toStation);
-		this.stations = new ArrayList<>(stationList);
+		this.stations = new ArrayList<>(List.of(line.getStartStation(), line.getEndStation()));
+	}
+
+	public Line getLine(){
+		return line;
 	}
 
 	public void addStationByIndex(int index, Station station){

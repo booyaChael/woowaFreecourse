@@ -9,15 +9,18 @@ import subway.domain.StationRepository;
 public class StationManager {
 	public void run(){
 		OutputView.printStationFunction();
-		String function = InputView.getFunctionSelectInput();
+		String function = InputView.getFunctionSelect();
 		if(function.equals("1")){
 			registerStation();
+			return;
 		}
 		if(function.equals("2")){
 			deleteStation();
+			return;
 		}
 		if(function.equals("3")){
 			readStations();
+			return;
 		}
 		if(function.equals("B")){
 			return;
@@ -28,7 +31,7 @@ public class StationManager {
 	private void registerStation(){
 		while(true){
 			try{
-				String stationName = InputView.getStationToRegisterInput();
+				String stationName = InputView.getStationToRegister();
 				validateRegister(stationName);
 				StationRepository.addStation(new Station(stationName));
 				OutputView.printStationRegisteredSuccess();
@@ -42,7 +45,7 @@ public class StationManager {
 	private void deleteStation(){
 		while(true){
 			try{
-				String stationName = InputView.getStationToDeleteInput();
+				String stationName = InputView.getStationToDelete();
 				validateDelete(stationName);
 				StationRepository.deleteStation(stationName);
 				break;

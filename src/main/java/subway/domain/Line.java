@@ -15,5 +15,13 @@ public class Line {
         return name;
     }
 
+    public Station getStartStation(){
+        return startStation;
+    }
+
+    public Station getEndStation(){
+        return endStation;
+    }
+
     // 추가 기능 구현
 }
