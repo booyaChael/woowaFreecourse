@@ -13,5 +13,16 @@ public enum Coin {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
+    public int getAmount(){
+        return this.amount;
+    }
+
+    public static Coin findByAmount(int amount) {
+        for (Coin coin : values()) {
+            if (coin.getAmount() == amount) {
+                return coin;
+            }
+        }
+        return null;
+    }
 }
