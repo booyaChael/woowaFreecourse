@@ -12,4 +12,8 @@ public class OutputView {
 			System.out.println(coin.getAmount() + "원 - " + count + "개");
 		}
 	}
+
+	static public void printUserMoneyLeft(int userMoney){
+		System.out.printf("투입 금액: %d원\n", userMoney);
+	}
 }

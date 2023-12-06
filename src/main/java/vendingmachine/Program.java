@@ -18,6 +18,8 @@ public class Program {
 		Map<Coin, Integer> coins = coinsMaker.makeCoins(machineMoney);
 		OutputView.printMachineCoins(coins);
 		Map<Product, Integer> products = productsMaker.makeProducts(InputView.getMachineProducts());
+		VendingMachine vendingMachine = new VendingMachine(machineMoney, coins, products);
+		vendingMachine.takeOrder();
 	}
 
 }
