@@ -17,8 +17,7 @@ public class Program {
 		int machineMoney = Integer.parseInt(InputView.getMachineMoney());
 		Map<Coin, Integer> coins = coinsMaker.makeCoins(machineMoney);
 		OutputView.printMachineCoins(coins);
-
-		String productsInput = InputView.getMachineProducts();
+		Map<Product, Integer> products = productsMaker.makeProducts(InputView.getMachineProducts());
 	}
 
 }
