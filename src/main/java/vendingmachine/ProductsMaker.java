@@ -10,22 +10,52 @@ public class ProductsMaker {
 		String[] productsArray = productsInput.split(";");
 
 		for (String productInfo : productsArray) {
-			// 각 제품 정보를 대괄호로 분리
-			String[] productDetails = productInfo.replaceAll("\\[|\\]", "").split(",");
+			try{
+				Product product = createProduct(productInfo);
+				int productQuantity = extractProductQuantity(productInfo);
 
-			// 제품 정보 추출
-			String productName = productDetails[0].trim();
-			int productPrice = Integer.parseInt(productDetails[1].trim());
-			int productQuantity = Integer.parseInt(productDetails[2].trim());
-
-			// Product 객체 생성
-			Product product = new Product(productName, productPrice);
-
-			// Map에 추가
-			productsMap.put(product, productQuantity);
+				productsMap.put(product, productQuantity);
+			} catch(IllegalArgumentException e){
+				System.out.println(e.getMessage());
+			}
 		}
-
 		return productsMap;
+	}
+
+	private Product createProduct(String productInfo) {
+		String[] productDetails = productInfo.replaceAll("\\[|\\]", "").split(",");
+
+		String productName = productDetails[0].trim();
+		validateProductName(productName);
+		String productPriceInput = productDetails[1].trim();
+		int productPrice = validateProductPrice(productPriceInput);
+
+		return new Product(productName, productPrice);
+	}
+
+	private int extractProductQuantity(String productInfo) {
+		String[] productDetails = productInfo.replaceAll("\\[|\\]", "").split(",");
+		String productQuantityInput = productDetails[2].trim();
+		return validateProductQuantity(productQuantityInput);
+	}
+
+	private void validateProductName(String productName){
+		Validator.checkLengthNotUnder2(productName);
+	}
+
+	private int validateProductPrice(String productPriceInput){
+		Validator.checkIsNumber(productPriceInput);
+		int productPrice = Integer.parseInt(productPriceInput);
+		Validator.checkIsDividedBy10(productPrice);
+		Validator.checkOver100(productPrice);
+		return productPrice;
+	}
+
+	private int validateProductQuantity(String productQuantityInput){
+		Validator.checkIsNumber(productQuantityInput);
+		int productQuantity = Integer.parseInt(productQuantityInput);
+		Validator.checkOver1(productQuantity);
+		return productQuantity;
 	}
 
 }

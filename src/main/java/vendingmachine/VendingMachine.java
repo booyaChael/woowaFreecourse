@@ -1,6 +1,7 @@
 // VendingMachine.java
 package vendingmachine;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import vendingmachine.View.InputView;
@@ -19,9 +20,22 @@ import vendingmachine.View.OutputView;
 		}
 
 		public void takeOrder(){
-			this.userMoney = Integer.parseInt(InputView.getUserMoney());
+			this.userMoney = readUserMoney();
 			buy();
+			Map<Coin, Integer> change = makeCoinsToChange();
+			OutputView.printChange(change);
+		}
 
+		private int readUserMoney(){
+			while(true){
+				try{
+					String input = InputView.getUserMoney();
+					validateUserMoney(input);
+					return Integer.parseInt(input);
+				} catch(IllegalArgumentException e){
+					System.out.println(e.getMessage());
+				}
+			}
 		}
 
 		private void buy(){
@@ -35,12 +49,12 @@ import vendingmachine.View.OutputView;
 					if(findLowestPriceOfCurrentProducts() > userMoney || isNoProductLeft()){
 						break;
 					}
-
 				} catch(IllegalArgumentException e){
 					System.out.println(e.getMessage());
 				}
 			}
 		}
+
 
 		private Product findProductByName(String productName) {
 			for (Map.Entry<Product, Integer> entry : products.entrySet()) {
@@ -87,6 +101,27 @@ import vendingmachine.View.OutputView;
 			}
 			products.put(product, currentQuantity - 1);
 			userMoney -= product.getPrice();
+		}
+
+		// giveUserMoneyBack
+		private Map<Coin, Integer> makeCoinsToChange(){
+			Map<Coin, Integer> change = new HashMap<>();
+			for(Map.Entry<Coin, Integer> entry : machineCoins.entrySet()){
+				Coin coin = entry.getKey();
+				int quantity = userMoney/coin.getAmount();
+
+				// 코인 주기
+				change.put(coin, quantity);
+				userMoney -= coin.getAmount();
+			}
+			return change;
+		}
+
+		private void validateUserMoney(String input){
+			Validator.checkIsNumber(input);
+
+			int machineMoney = Integer.parseInt(input);
+			Validator.checkIsDividedBy10(machineMoney);
 		}
 
 

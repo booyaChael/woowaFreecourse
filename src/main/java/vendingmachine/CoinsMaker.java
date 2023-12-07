@@ -12,28 +12,28 @@ public class CoinsMaker {
 
 	public Map<Coin, Integer> makeCoins(int machineMoney){
 		Map<Coin, Integer> coins = new HashMap<>();
-		List<Integer> coinList = makeCoinList();
 
 		int machineMoneyLeft = machineMoney;
-		while(machineMoneyLeft >= Coin.COIN_10.getAmount()){
-			Coin coin = makeRandomCoin(coinList);
-			if(coin.getAmount() > machineMoneyLeft){
-				continue;
+		// 자판기 내 남은돈(machineMoneyLeft)가 존재하는 동안은 Coin을 계속 생성하여 coins에 넣는다.
+		while(machineMoneyLeft > 0){
+			Coin coin = makeRandomCoin();
+			if(coin.getAmount() <= machineMoneyLeft){
+				coins.put(coin, coins.getOrDefault(coin, 0) + 1);
+				machineMoneyLeft -= coin.getAmount();
 			}
-			coins.put(coin, coins.getOrDefault(coin, 0) + 1);
-			machineMoneyLeft -= coin.getAmount();
 		}
 		return coins;
 	}
 
-	private List<Integer> makeCoinList(){
+	private Coin makeRandomCoin(){
+		List<Integer> coinList = makeCoinListByEnum();
+		int coinAmount = Randoms.pickNumberInList(coinList);
+		return Coin.findByAmount(coinAmount);
+	}
+
+	private List<Integer> makeCoinListByEnum(){
 		return Arrays.stream(Coin.values())
 			.map(Coin::getAmount)
 			.collect(Collectors.toList());
-	}
-
-	private Coin makeRandomCoin(List<Integer> coinList){
-		int coinAmount = Randoms.pickNumberInList(coinList);
-		return Coin.findByAmount(coinAmount);
 	}
 }

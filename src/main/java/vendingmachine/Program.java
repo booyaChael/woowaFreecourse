@@ -14,12 +14,33 @@ public class Program {
 		this.productsMaker = productsMaker;
 	}
 	public void run(){
-		int machineMoney = Integer.parseInt(InputView.getMachineMoney());
+		int machineMoney = readMachineMoney();
 		Map<Coin, Integer> coins = coinsMaker.makeCoins(machineMoney);
 		OutputView.printMachineCoins(coins);
+
 		Map<Product, Integer> products = productsMaker.makeProducts(InputView.getMachineProducts());
 		VendingMachine vendingMachine = new VendingMachine(machineMoney, coins, products);
 		vendingMachine.takeOrder();
+	}
+
+	private int readMachineMoney(){
+		while(true){
+			try{
+				String input = InputView.getMachineMoney();
+				validateMachineMoney(input);
+				return Integer.parseInt(input);
+			} catch(IllegalArgumentException e){
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	private void validateMachineMoney(String input){
+		Validator.checkIsNumber(input);
+
+		int machineMoney = Integer.parseInt(input);
+		Validator.checkIsDividedBy10(machineMoney);
+		Validator.checkOver100(machineMoney);
 	}
 
 }
