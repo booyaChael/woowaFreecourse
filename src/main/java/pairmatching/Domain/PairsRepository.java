@@ -11,5 +11,9 @@ public class PairsRepository {
 		pairsMap.put(mission, pairs);
 	}
 
+	public static List<Pair> getPairs(Mission mission){
+		return pairsMap.get(mission);
+	}
+
 
 }

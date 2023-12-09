@@ -11,6 +11,33 @@ public class MissionRepository {
 		missions.add(new Mission(course, level, missionName));
 	}
 
+	static public Mission findMissionByInput(String input) {
+		String[] parts = input.split(", ");
+		if(parts.length != 3){
+			throw new IllegalArgumentException("[ERROR] 올바른 입력형식이 아닙니다.");
+		}
+
+		Course course = null;
+		Level level= null;
+		String missionName;
+
+		String courseInput = parts[0];
+		for(Course currentCourse : Course.values()){
+			if(courseInput.equals(currentCourse.getName())){
+				course = currentCourse;
+			}
+		}
+
+		String levelInput = parts[1];
+		for(Level currentLevel : Level.values()){
+			if(levelInput.equals(currentLevel.getName())){
+				level = currentLevel;
+			}
+		}
+
+		missionName = parts[2];
+		return getMission(course, level, missionName);
+	}
 	public static Mission getMission(Course course, Level level, String missionName) {
 		Optional<Mission> matchingMission = missions.stream()
 			.filter(mission ->
