@@ -47,10 +47,15 @@ public class SectionManager {
 
 	private void deleteSection(){
 		String lineName = InputView.getLineToDeleteSection();
+		validateLineNameToDelete(lineName);
 		SectionRepository.deleteSection(lineName);
 	}
 
 	private void validateLineNameToRegister(String lineName){
+		Validator.lineShouldExist(lineName);
+	}
+
+	private void validateLineNameToDelete(String lineName){
 		Validator.lineShouldExist(lineName);
 	}
 
