@@ -15,5 +15,9 @@ public class PairsRepository {
 		return pairsMap.get(mission);
 	}
 
+	public static void deleteAll() {
+		pairsMap.clear();
+	}
+
 
 }

@@ -1,5 +1,9 @@
 package pairmatching;
 
+import pairmatching.Domain.PairsRepository;
+
 public class PairResetManager {
-	public void run(){}
+	public void run(){
+		PairsRepository.deleteAll();
+	}
 }
