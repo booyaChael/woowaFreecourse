@@ -10,6 +10,6 @@ public class PairReadManager {
 	public void run(){
 		String input = InputView.getCourseLevelMission();
 		Mission mission = MissionRepository.findMissionByInput(input);
-		OutputView.printPairs(PairsRepository.getPairs(mission));
+		OutputView.printPairs(PairsRepository.getPairsByMission(mission));
 	}
 }

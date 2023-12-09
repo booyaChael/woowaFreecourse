@@ -15,9 +15,6 @@ public class CrewRepository {
 		crews.add(crew);
 	}
 
-	public static List<Crew> getCrews() {
-		return crews;
-	}
 
 	public static Crew getCrewByName(String name){
 		for(Crew crew : crews){

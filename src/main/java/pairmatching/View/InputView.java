@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 	static public String getFunction(){
-		System.out.println("기능을 선택하세요.\n"
+		System.out.println("\n기능을 선택하세요.\n"
 			+ "1. 페어 매칭\n"
 			+ "2. 페어 조회\n"
 			+ "3. 페어 초기화\n"
@@ -12,8 +12,14 @@ public class InputView {
 		return Console.readLine();
 	}
 
+	static public String getIsChangeData(){
+		System.out.println("매칭 정보가 있습니다. 다시 매칭하시겠습니까?\n"
+			+ "네 | 아니오\n");
+		return Console.readLine();
+	}
+
 	static public String getCourseLevelMission(){
-		System.out.println("#############################################\n"
+		System.out.println("\n#############################################\n"
 			+ "과정: 백엔드 | 프론트엔드\n"
 			+ "미션:\n"
 			+ "  - 레벨1: 자동차경주 | 로또 | 숫자야구게임\n"

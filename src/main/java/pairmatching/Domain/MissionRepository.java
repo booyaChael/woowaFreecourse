@@ -38,6 +38,19 @@ public class MissionRepository {
 		missionName = parts[2];
 		return getMission(course, level, missionName);
 	}
+
+	public static List<Mission> findMissionsWithSameCourseAndLevel(Mission mission){
+		Course course = mission.getCourse();
+		Level level = mission.getLevel();
+
+		List<Mission> result = new ArrayList<>();
+		for(Mission currentMission : missions){
+			if(currentMission.getCourse() == course && currentMission.getLevel() == level){
+				result.add(currentMission);
+			}
+		}
+		return result;
+	}
 	public static Mission getMission(Course course, Level level, String missionName) {
 		Optional<Mission> matchingMission = missions.stream()
 			.filter(mission ->
