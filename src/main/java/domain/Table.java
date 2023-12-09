@@ -11,8 +11,7 @@ public class Table {
     private Map<Menu, Integer> order;
 
     public Table(final int number) {
-        this.number = number;
-        this.order = new HashMap<>();
+        this(number, new HashMap<>());
     }
 
     public Table(int number, Map<Menu, Integer> order){
