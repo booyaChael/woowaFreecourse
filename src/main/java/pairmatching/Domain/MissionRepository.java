@@ -1,6 +1,8 @@
+//MissionRepository.java
 package pairmatching.Domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,30 +65,22 @@ public class MissionRepository {
 	}
 
 	static {
-		missions.add(new Mission(Course.BACKEND, Level.LEVEL1, "자동차경주"));
-		missions.add(new Mission(Course.BACKEND, Level.LEVEL1, "로또"));
-		missions.add(new Mission(Course.BACKEND, Level.LEVEL1, "숫자야구게임"));
+		for (Level level : Level.values()) {
+			List<String> missionDataList = new ArrayList<>();
 
-		missions.add(new Mission(Course.BACKEND, Level.LEVEL2, "장바구니"));
-		missions.add(new Mission(Course.BACKEND, Level.LEVEL2, "결제"));
-		missions.add(new Mission(Course.BACKEND, Level.LEVEL2, "지하철노선도"));
+			if (level == Level.LEVEL1) {
+				missionDataList = Arrays.asList("자동차경주", "로또", "숫자야구게임");
+			} else if (level == Level.LEVEL2) {
+				missionDataList = Arrays.asList("장바구니", "결제", "지하철노선도");
+			} else if (level == Level.LEVEL4) {
+				missionDataList = Arrays.asList("성능개선", "배포");
+			}
 
-		missions.add(new Mission(Course.BACKEND, Level.LEVEL4, "성능개선"));
-		missions.add(new Mission(Course.BACKEND, Level.LEVEL4, "배포"));
-
-		missions.add(new Mission(Course.FRONTEND, Level.LEVEL1, "자동차경주"));
-		missions.add(new Mission(Course.FRONTEND, Level.LEVEL1, "로또"));
-		missions.add(new Mission(Course.FRONTEND, Level.LEVEL1, "숫자야구게임"));
-
-		missions.add(new Mission(Course.FRONTEND, Level.LEVEL2, "장바구니"));
-		missions.add(new Mission(Course.FRONTEND, Level.LEVEL2, "결제"));
-		missions.add(new Mission(Course.FRONTEND, Level.LEVEL2, "지하철노선도"));
-
-		missions.add(new Mission(Course.FRONTEND, Level.LEVEL4, "성능개선"));
-		missions.add(new Mission(Course.FRONTEND, Level.LEVEL4, "배포"));
-
-
-
+			for (String missionName : missionDataList) {
+				missions.add(new Mission(Course.BACKEND, level, missionName));
+				missions.add(new Mission(Course.FRONTEND, level, missionName));
+			}
+		}
 	}
 
 
